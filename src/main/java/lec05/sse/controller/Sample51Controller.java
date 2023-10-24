@@ -11,6 +11,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import lec05.sse.model.FruitMapper;
+import lec05.sse.model.Fruit;
+
 /**
  * /sample5へのリクエストを扱うクラス authenticateの設定をしていれば， /sample5へのアクセスはすべて認証が必要になる
  */
@@ -18,8 +21,18 @@ import org.springframework.web.bind.annotation.RequestParam;
 @RequestMapping("/sample5")
 public class Sample51Controller {
 
+  @Autowired
+  FruitMapper fMapper;
+
   @GetMapping("step1")
   public String sample51() {
+    return "sample51.html";
+  }
+
+  @GetMapping("step2")
+  public String sample52(ModelMap model) {
+    ArrayList<Fruit> fruits2 = fMapper.selectAllFruit();
+    model.addAttribute("fruits2", fruits2);
     return "sample51.html";
   }
 
